@@ -1,0 +1,67 @@
+---
+import { get } from "@lib/bcv/get";
+import ThemeToggle from "./ThemeToggle.astro";
+
+const global = await get();
+console.log(global);
+---
+
+<header
+  class="dark:text-red text-black flex border-b py-1 md:py-2 dark:border-b-secondary border-b-primary-white px-2 bg-red"
+>
+  <nav class="flex">
+    <div class="flex flex-row items-center gap-5">
+      <img
+        src="/favicon.svg"
+        alt="alcambio"
+        width="34"
+        height="34"
+        loading="lazy"
+        decoding="async"
+      />
+      <ul class="hidden md:flex flew-row gap-x-4">
+        <li>
+          <a
+            class="ring-accent ring-2 text-accent font-semibold bg-red dark:bg-red
+    px-4 py-1 rounded-lg flex items-center justify-center text-red"
+            href=""
+          >
+            Calculadora
+          </a>
+        </li>
+        <li>
+          <a
+            class="dark:ring-secondary ring-gray-200 ring-2
+    px-4 py-1 rounded-lg flex items-center justify-center"
+            href="bank"
+          >
+            Comisión bancos
+          </a>
+        </li>
+        <li>
+          <a
+            class="dark:ring-secondary ring-gray-200 ring-2
+    px-4 py-1 rounded-lg flex items-center justify-center mr-[30rem]"
+            href="/historial"
+          >
+            Historial
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="flex justify-end items-center space-x-4 py-2 px-4">
+      <h2
+        class="text-accent flex text-sm md:text-base rounded-lg border-2 border-accent/10 dark:bg-red /10 bg-red -white px-3 py-1 text-center min-w-32 lg:min-w-80 items-center"
+      >
+        $ <strong> 1.00</strong>
+        <span class=""> = </span>
+        <span id="price-usd">
+          Bs.S <strong>{global.monitors.bcv.price}</strong>
+        </span>
+        <span class="hidden lg:flex ms-2"> {global.datetime.date} </span>
+      </h2>
+      <ThemeToggle />
+    </div>
+  </nav>
+</header>
