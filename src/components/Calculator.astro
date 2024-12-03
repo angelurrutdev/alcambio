@@ -65,7 +65,6 @@ const global = await get();
           type="radio"
           name="tasas"
           id="Paralelo"
-          name="value"
           value={global.monitors.enparalelovzla.price}
           class="hidden peer"
           checked=""
@@ -89,7 +88,7 @@ const global = await get();
       Bs.S <strong>{global.monitors.bcv.price}</strong>
     </p>
     <p class="text-neutral-500 px-9 py-1 mt-5 max-w-72 text-xs">
-      Ultima actualización <br />
+      Última actualización <br />
       <strong>{global.monitors.bcv.last_update}</strong>
     </p>
   </article>
@@ -103,7 +102,7 @@ const global = await get();
         class="flex items-center gap-3 mb-2 md:text-lg text-base font-semibold text-secondary dark:text-white"
       >
         <UnitedStates />
-        Dolares
+        Dólares
       </label>
       <div class="relative">
         <label
@@ -129,7 +128,7 @@ const global = await get();
         class="flex items-center gap-3 mb-2 md:text-lg text-base font-semibold dark:text-white"
       >
         <Venezuela />
-        Bolivares
+        Bolívares
       </label>
       <div class="relative">
         <label
@@ -141,6 +140,7 @@ const global = await get();
         <input
           class="text-2xl md:text-3xl placeholder:text-2xl md:placeholder:text-3xl dark:bg-tertiary bg-gray-100 dark:text-white dark:ring-[#353535] ring-gray-200 ring-2 rounded-md p-2 focus:outline-none focus:ring-2 w-full focus:ring-accent h-auto ps-20 dark:bg-raisin-black"
           id="bolivares"
+          name="value"
           type="text"
           placeholder={global.monitors.bcv.price}
           autocomplete="off"
@@ -156,7 +156,7 @@ const global = await get();
       target="_blank"
       rel="noopener noreferrer"
       class="text-blue-500 underline">BCV</a
-    > para nuestra calculadora. Esta informacion es solo para fines informativos.
+    > para nuestra calculadora. Esta información es solo para fines informativos.
   </p>
 </section>
 
@@ -165,41 +165,40 @@ const global = await get();
 
   (async function () {
     const global = await get();
-
     const tasa_bcv = `${global.monitors.bcv.price}`;
 
-    const $ = (el) => document.querySelector(el);
+    const $ = (el: string) => document.querySelector(el);
 
     let valueTasa = tasa_bcv.toString();
     const $usd = document.querySelector("#dolares") as HTMLInputElement;
     const $bs = document.querySelector("#bolivares") as HTMLInputElement;
-    const $mount = $("#mount");
-    const btnCopyConvert = $("#btn-copy-convert");
+    const $mount = document.querySelector("#mount") as HTMLInputElement;
+    const btnCopyConvert = document.getElementById(
+      "btn-copy-convert"
+    ) as HTMLInputElement;
 
     const $tasas = Array.from(document.querySelectorAll("input[name='tasas']"));
 
     $tasas.forEach((element) => {
-      element.addEventListener("change", () => {
-        valueTasa = element.value;
+      const inputElement = element as HTMLInputElement;
+      inputElement.addEventListener("change", () => {
+        valueTasa = inputElement.value;
 
         if ($bs.value === "" && $usd.value === "") {
-          $mount.innerHTML = formatearCurrency("es-VE", "VES", element.value);
+          const numericValue = parseFloat(inputElement.value); // Convierte el valor a número
+          $mount.innerHTML = formatearCurrency("es-VE", "VES", numericValue); // Pasa el número a la función
           return;
         }
 
         if ($bs.value === "" && $usd.value !== "") calculateUsdToBs();
         if ($bs.value !== "" && $usd.value === "") calculateBsToUsd();
-
-        $bs.setAttribute("placeholder", element.value);
       });
     });
 
     btnCopyConvert.addEventListener("click", () => {
       copiarAlPortapapeles($mount.innerText);
-
       const inner = btnCopyConvert.innerHTML;
       btnCopyConvert.innerText = "Copiado!";
-
       setTimeout(() => {
         btnCopyConvert.innerHTML = inner;
       }, 3000);
@@ -207,7 +206,6 @@ const global = await get();
 
     const calculateBsToUsd = () => {
       $bs.value = formatCurrencyInput($bs.value, ",");
-
       const value = Number($bs.value.replaceAll(".", "").replace(",", "."));
       const priceUsd = Number(valueTasa.replaceAll(",", "."));
       const calculate = value / priceUsd;
@@ -218,10 +216,9 @@ const global = await get();
 
     const calculateUsdToBs = () => {
       $usd.value = formatCurrencyInput($usd.value, ".");
-
       const value = Number($usd.value.replace(/\.(?=.*\.)/g, ""));
       const priceUsd = Number(valueTasa);
-      const calculate = value * priceUsd; // Cambié toFixed(2) a una multiplicación simple.
+      const calculate = value * priceUsd;
 
       $bs.value = "";
       $mount.innerHTML = formatearCurrency("es-VE", "VES", calculate);
@@ -230,13 +227,17 @@ const global = await get();
     $bs.addEventListener("input", () => calculateBsToUsd());
     $usd.addEventListener("input", () => calculateUsdToBs());
 
-    const copiarAlPortapapeles = (texto) => {
+    const copiarAlPortapapeles = (texto: string) => {
       if (navigator.clipboard) {
         navigator.clipboard.writeText(texto);
       }
     };
 
-    const formatearCurrency = (locale, currency, value) => {
+    const formatearCurrency = (
+      locale: Intl.LocalesArgument,
+      currency: string,
+      value: number | bigint
+    ) => {
       const formatter = new Intl.NumberFormat(locale, {
         style: "currency",
         currency,
@@ -244,7 +245,7 @@ const global = await get();
       return formatter.format(value);
     };
 
-    function formatCurrencyInput(inputValue, decimal) {
+    function formatCurrencyInput(inputValue: string, decimal: string) {
       const cleanedValue = inputValue.replace(/[^0-9]/g, "");
 
       if (cleanedValue === "") return "0.00";
@@ -259,9 +260,10 @@ const global = await get();
       return formattedValue;
     }
 
-    const quitarCerosALaIzquierda = (cadena) => parseInt(cadena, 10).toString();
+    const quitarCerosALaIzquierda = (cadena: string) =>
+      parseInt(cadena, 10).toString();
 
-    const addCommasToNumber = (number) =>
+    const addCommasToNumber = (number: string) =>
       number.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
   })();
 </script>
