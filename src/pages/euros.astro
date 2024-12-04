@@ -1,0 +1,241 @@
+---
+import ButtonHidden from "@components/Button-hidden.astro";
+import PillMount from "@components/PillMount.astro";
+import Header from "@components/Header.astro";
+import Spain from "@components/icons/Spain.astro";
+import Venezuela from "@icons/Venezuela.astro";
+import Layout from "@layouts/Layout.astro";
+import { get } from "src/lib/euro/get";
+import Converts from "@components/Converts.astro";
+import ConvertsEUR from "@components/ConvertsEUR.astro";
+const global = await get();
+---
+
+<Layout>
+  <Header
+    value={global.monitors.bcv.price}
+    value_datetime={global.datetime.date}
+    sign="€ "
+  />
+  <section
+    class="mt-12 mx-auto w-[340px] md:w-1/2 rounded-3xl bg-white border-2 border-transparent dark:text-neutral-100 dark:bg-raisin-black overflow-hidden p-6 lg:p-8 text-black"
+  >
+    <div class="flex flex-col gap-1 z-[1]">
+      <h3 class="text-2xl font-bold">Calculadora</h3>
+
+      <h1 class="md:text-base text-sm opacity-70">
+        Convierté dólares estadounidenses a bolívares a la tasa de paralelo y
+        BCV - USD a VES
+      </h1>
+    </div>
+    <section class="flex justify-center mt-2">
+      <ul class="grid grid-cols-2 items-center rounded-lg">
+        <PillMount
+          id="BCV"
+          value={global.monitors.bcv.price}
+          name="BCV"
+          title="BCV"
+        />
+
+        <PillMount
+          id="Paralelo"
+          value={global.monitors.enparalelovzla.price}
+          name="Paralelo"
+          title="Paralelo"
+        />
+
+        <ButtonHidden id="btn-copy-convert" />
+      </ul>
+    </section>
+    <article
+      class="text-center text-accent md:my-8 my-3 items-center flex flex-col"
+    >
+      <p class="text-5xl md:text-7xl font-bold" id="mount">
+        Bs.S <strong>{global.monitors.bcv.price}</strong>
+      </p>
+      <p class="text-neutral-500 px-9 py-1 mt-5 max-w-72 text-xs">
+        Última actualización <br />
+        <strong>{global.monitors.bcv.last_update}</strong>
+      </p>
+    </article>
+
+    <form
+      class="dark:bg-tertiary bg-secondary-white border-t dark:border-t-secondary border-t-primary-white grid grid-cols-1 md:grid-cols-2 gap-x-9 px-7 py-5 items-center"
+    >
+      <div class="flex flex-col mb-2 md:mb-0">
+        <label
+          for="dolares"
+          class="flex items-center gap-3 mb-2 md:text-lg text-base font-semibold text-secondary dark:text-white"
+        >
+          <Spain />
+          Euros
+        </label>
+        <div class="relative">
+          <label
+            for="dolares"
+            class="text-1xl md:text-2xl text-primary font-semibold absolute top-3 left-4"
+          >
+            €
+          </label>
+          <input
+            class="text-2xl md:text-3xl placeholder:text-2xl md:placeholder:text-3xl dark:bg-tertiary bg-gray-100 dark:text-white dark:ring-[#353535] ring-gray-200 ring-2 rounded-md p-2 focus:outline-none focus:ring-2 w-full focus:ring-accent h-auto ps-10 dark:bg-raisin-black"
+            id="dolares"
+            type="text"
+            placeholder="1.00"
+            autocomplete="off"
+            autofocus=""
+            spellcheck="false"
+          />
+        </div>
+      </div>
+      <div class="flex flex-col mb-2 md:mb-0">
+        <label
+          for="bolivares"
+          class="flex items-center gap-3 mb-2 md:text-lg text-base font-semibold dark:text-white"
+        >
+          <Venezuela />
+          Bolívares
+        </label>
+        <div class="relative">
+          <label
+            for="bolivares"
+            class="text-1xl md:text-2xl text-primary font-semibold absolute top-3 left-4"
+          >
+            Bs.S
+          </label>
+          <input
+            class="text-2xl md:text-3xl placeholder:text-2xl md:placeholder:text-3xl dark:bg-tertiary bg-gray-100 dark:text-white dark:ring-[#353535] ring-gray-200 ring-2 rounded-md p-2 focus:outline-none focus:ring-2 w-full focus:ring-accent h-auto ps-20 dark:bg-raisin-black"
+            id="bolivares"
+            name="value"
+            type="text"
+            placeholder={global.monitors.bcv.price}
+            autocomplete="off"
+            autofocus=""
+            spellcheck="false"
+          />
+        </div>
+      </div>
+    </form>
+    <p class="text-neutral-400 text-sm text-center">
+      Usamos la tasa del <a
+        href="https://www.bcv.org.ve/"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-blue-500 underline">BCV</a
+      > para nuestra calculadora. Esta información es solo para fines informativos.
+    </p>
+    <ConvertsEUR EuroToConvert="1" TwoEuroToConvert="5" />
+    <ConvertsEUR EuroToConvert="10" TwoEuroToConvert="20" />
+    <ConvertsEUR EuroToConvert="30" TwoEuroToConvert="40" />
+    <ConvertsEUR EuroToConvert="50" TwoEuroToConvert="60" />
+    <ConvertsEUR EuroToConvert="80" TwoEuroToConvert="80" />
+    <ConvertsEUR EuroToConvert="90" TwoEuroToConvert="100" />
+  </section>
+</Layout>
+<script>
+  import { get } from "@lib-euro/get";
+
+  (async function () {
+    const global = await get();
+    const tasa_bcv = `${global.monitors.bcv.price}`;
+
+    const $ = (el: string) => document.querySelector(el);
+
+    let valueTasa = tasa_bcv.toString();
+    const $usd = document.querySelector("#dolares") as HTMLInputElement;
+    const $bs = document.querySelector("#bolivares") as HTMLInputElement;
+    const $mount = document.querySelector("#mount") as HTMLInputElement;
+    const btnCopyConvert = document.getElementById(
+      "btn-copy-convert"
+    ) as HTMLInputElement;
+
+    const $tasas = Array.from(document.querySelectorAll("input[name='tasas']"));
+
+    $tasas.forEach((element) => {
+      const inputElement = element as HTMLInputElement;
+      inputElement.addEventListener("change", () => {
+        valueTasa = inputElement.value;
+
+        if ($bs.value === "" && $usd.value === "") {
+          const numericValue = parseFloat(inputElement.value); // Convierte el valor a número
+          $mount.innerHTML = formatearCurrency("es-VE", "VES", numericValue); // Pasa el número a la función
+          return;
+        }
+
+        if ($bs.value === "" && $usd.value !== "") calculateUsdToBs();
+        if ($bs.value !== "" && $usd.value === "") calculateBsToUsd();
+      });
+    });
+
+    btnCopyConvert.addEventListener("click", () => {
+      copiarAlPortapapeles($mount.innerText);
+      const inner = btnCopyConvert.innerHTML;
+      btnCopyConvert.innerText = "Copiado!";
+      setTimeout(() => {
+        btnCopyConvert.innerHTML = inner;
+      }, 3000);
+    });
+
+    const calculateBsToUsd = () => {
+      $bs.value = formatCurrencyInput($bs.value, ",");
+      const value = Number($bs.value.replaceAll(".", "").replace(",", "."));
+      const priceUsd = Number(valueTasa.replaceAll(",", "."));
+      const calculate = value / priceUsd;
+
+      $usd.value = "";
+      $mount.innerHTML = formatearCurrency("en-US", "USD", calculate);
+    };
+
+    const calculateUsdToBs = () => {
+      $usd.value = formatCurrencyInput($usd.value, ".");
+      const value = Number($usd.value.replace(/\.(?=.*\.)/g, ""));
+      const priceUsd = Number(valueTasa);
+      const calculate = value * priceUsd;
+
+      $bs.value = "";
+      $mount.innerHTML = formatearCurrency("es-VE", "VES", calculate);
+    };
+
+    $bs.addEventListener("input", () => calculateBsToUsd());
+    $usd.addEventListener("input", () => calculateUsdToBs());
+
+    const copiarAlPortapapeles = (texto: string) => {
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(texto);
+      }
+    };
+
+    const formatearCurrency = (
+      locale: Intl.LocalesArgument,
+      currency: string,
+      value: number | bigint
+    ) => {
+      const formatter = new Intl.NumberFormat(locale, {
+        style: "currency",
+        currency,
+      });
+      return formatter.format(value);
+    };
+
+    function formatCurrencyInput(inputValue: string, decimal: string) {
+      const cleanedValue = inputValue.replace(/[^0-9]/g, "");
+
+      if (cleanedValue === "") return "0.00";
+
+      const amount = cleanedValue.slice(0, -2) || "0";
+      const cents = cleanedValue.slice(-2);
+      const formattedAmount = addCommasToNumber(
+        quitarCerosALaIzquierda(amount)
+      );
+      const formattedValue = `${formattedAmount}${decimal}${cents}`;
+
+      return formattedValue;
+    }
+
+    const quitarCerosALaIzquierda = (cadena: string) =>
+      parseInt(cadena, 10).toString();
+
+    const addCommasToNumber = (number: string) =>
+      number.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+  })();
+</script>

@@ -1,0 +1,64 @@
+---
+import Arrows from "./icons/Arrows.astro";
+import UnitedStates from "./icons/UnitedStates.astro";
+import Venezuela from "./icons/Venezuela.astro";
+import { get } from "@lib-dollar/get";
+const global = await get();
+
+const { DollarToConvert, TwoDollarToConvert } = Astro.props;
+
+interface Props {
+  DollarToConvert: string;
+  TwoDollarToConvert: string;
+}
+
+const initialDollarAmount = parseFloat(DollarToConvert);
+const TwoinitialDollarAmount = parseFloat(TwoDollarToConvert);
+const TwoBolivaresConvert = TwoinitialDollarAmount * global.monitors.bcv.price;
+const BolivaresConvert = initialDollarAmount * global.monitors.bcv.price;
+---
+
+<article class="grid grid-cols-2 gap-2 mt-4 mb-12 relative">
+  <section
+    class="border border-gray-200 dark:border-secondary dark:bg-primary-white bg-white overflow-hidden rounded-md items-center"
+  >
+    <div class="p-2 border-b border-gray-200 dark:border-secondary -mb-2">
+      <p class="text-sm text-left flex items-center">
+        <UnitedStates /> Equivalente de $<strong class="ms-1 me-2"
+          >{DollarToConvert}</strong
+        >
+        Dólares
+      </p>
+    </div>
+    <Arrows />
+    <div class="p-2 dark:bg-tertiary bg-secondary-white -mt-2">
+      <p class="text-sm text-right flex items-center justify-end">
+        a Bolívares son Bs.S <strong class="ms-1 me-2"
+          >{BolivaresConvert.toFixed(2)}</strong
+        >
+        <Venezuela />
+      </p>
+    </div>
+  </section>
+
+  <section
+    class="border border-gray-200 dark:border-secondary dark:bg-primary-white bg-white overflow-hidden rounded-md items-center"
+  >
+    <div class="p-2 border-b border-gray-200 dark:border-secondary -mb-2">
+      <p class="text-sm text-left flex items-center">
+        <UnitedStates /> Equivalente de<strong class="ms-1 me-2"
+          >{TwoDollarToConvert}</strong
+        >
+      </p>
+    </div>
+    <Arrows />
+    <div class="p-2 dark:bg-tertiary bg-secondary-white -mt-2">
+      <p class="text-sm text-right flex items-center justify-end">
+        a Bolívares son Bs.S <strong class="ms-1 me-2"
+          >{TwoBolivaresConvert.toFixed(2)}</strong
+        >
+        <Venezuela />
+      </p>
+    </div>
+  </section>
+</article>

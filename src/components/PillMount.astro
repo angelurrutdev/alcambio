@@ -1,0 +1,24 @@
+---
+const { class: className, value, name, id, title } = Astro.props;
+---
+
+<li>
+  <input
+    type="radio"
+    name="tasas"
+    id={id}
+    value={value}
+    class="hidden peer"
+    checked=""
+  />
+  <label
+    for={name}
+    class="bg-primary inline-flex text-xs p-2 border-[2px] border-transparent rounded-lg cursor-pointer transition hover:scale-110 text-gray-600"
+  >
+    <div class="font-semibold text-white">{title}</div>
+    <div class="font-bold md:ms-2 hidden md:flex text-white">
+      Bs.S
+      {value}
+    </div>
+  </label>
+</li>
