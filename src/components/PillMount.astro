@@ -13,10 +13,10 @@ const { class: className, value, name, id, title } = Astro.props;
   />
   <label
     for={name}
-    class="bg-primary inline-flex text-xs p-2 border-[2px] border-transparent rounded-lg cursor-pointer transition hover:scale-110 text-gray-600"
+    class="justify-center bg-primary inline-flex text-xs p-2 border-[2px] border-transparent rounded-lg cursor-pointer transition hover:scale-110 text-gray-600"
   >
-    <div class="font-semibold text-white">{title}</div>
-    <div class="font-bold md:ms-2 hidden md:flex text-white">
+    <div class="font-semibold text-white mr-1">{title}</div>
+    <div class="font-bold md:ms-4 md:flex text-white">
       Bs.S
       {value}
     </div>
