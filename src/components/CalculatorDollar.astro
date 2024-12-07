@@ -1,11 +1,11 @@
 ---
-import ButtonHidden from "./Button-hidden.astro";
-import PillMount from "./PillMount.astro";
-import Header from "./Header.astro";
-import UnitedStates from "./icons/UnitedStates.astro";
-import Venezuela from "./icons/Venezuela.astro";
-import Converts from "./Converts.astro";
-import { get } from "src/lib/dollar/get";
+import CopyButton from "@components/CopyButton.astro";
+import PillMount from "@components/PillMount.astro";
+import Header from "@components/Header.astro";
+import UnitedStates from "@icons/UnitedStates.astro";
+import Venezuela from "@icons/Venezuela.astro";
+import Converts from "@components/Converts.astro";
+import { get } from "@lib-dollar/get";
 const global = await get();
 ---
 
@@ -50,9 +50,9 @@ const global = await get();
     </p>
     <p class="text-neutral-500 px-9 py-1 my-3 max-w-72 text-xs">
       Última actualización <br />
-      <strong>{global.monitors.bcv.last_update}</strong>
+      <strong class="font-mono">{global.monitors.bcv.last_update}</strong>
     </p>
-    <ButtonHidden id="btn-copy-convert" />
+    <CopyButton id="btn-copy-convert" />
   </article>
 
   <form
@@ -125,7 +125,7 @@ const global = await get();
   <Converts DollarToConvert="10" TwoDollarToConvert="20" />
   <Converts DollarToConvert="30" TwoDollarToConvert="40" />
   <Converts DollarToConvert="50" TwoDollarToConvert="60" />
-  <Converts DollarToConvert="80" TwoDollarToConvert="80" />
+  <Converts DollarToConvert="70" TwoDollarToConvert="80" />
   <Converts DollarToConvert="90" TwoDollarToConvert="100" />
 </section>
 

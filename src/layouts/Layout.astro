@@ -1,9 +1,7 @@
 ---
-import "@fontsource/geist-mono"; // Defaults to weight 400
-import "@fontsource/geist-mono/400.css"; // Specify weight
-
 import Footer from "@components/Footer.astro";
 
+import "@fontsource-variable/inter";
 interface Props {
   description: string;
   title: string;
@@ -36,7 +34,7 @@ const { description, title } = Astro.props;
     <title>{title}</title>
   </head>
   <body
-    class="bg-moonlit dark:bg-dusky min-h-screen scroll-smooth font-sans antialiased selection:bg-neutral-200 dark:selection:bg-neutral-700"
+    class="bg-moonlit dark:bg-dusky min-h-screen scroll-smooth antialiased selection:bg-neutral-200 dark:selection:bg-neutral-700"
   >
     <main class="">
       <slot />
@@ -50,8 +48,15 @@ const { description, title } = Astro.props;
     color-scheme: light dark;
   }
 
+  body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    overscroll-behavior: none;
+  }
+
   html {
-    font-family: "Geist Mono";
+    font-family: "Inter Variable", system-ui;
 
     scroll-behavior: smooth;
   }

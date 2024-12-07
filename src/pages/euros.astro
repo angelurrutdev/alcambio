@@ -1,12 +1,12 @@
 ---
-import ButtonHidden from "@components/Button-hidden.astro";
+import CopyButton from "@components/CopyButton.astro";
 import PillMount from "@components/PillMount.astro";
 import Header from "@components/Header.astro";
 import Spain from "@components/icons/Spain.astro";
 import Venezuela from "@icons/Venezuela.astro";
 import Layout from "@layouts/Layout.astro";
-import { get } from "src/lib/euro/get";
 import ConvertsEUR from "@components/ConvertsEUR.astro";
+import { get } from "@lib-euro/get";
 const global = await get();
 ---
 
@@ -57,7 +57,7 @@ const global = await get();
         Última actualización <br />
         <strong>{global.monitors.bcv.last_update}</strong>
       </p>
-      <ButtonHidden id="btn-copy-convert" />
+      <CopyButton id="btn-copy-convert" />
     </article>
 
     <form
@@ -129,7 +129,7 @@ const global = await get();
     <ConvertsEUR EuroToConvert="10" TwoEuroToConvert="20" />
     <ConvertsEUR EuroToConvert="30" TwoEuroToConvert="40" />
     <ConvertsEUR EuroToConvert="50" TwoEuroToConvert="60" />
-    <ConvertsEUR EuroToConvert="80" TwoEuroToConvert="80" />
+    <ConvertsEUR EuroToConvert="70" TwoEuroToConvert="80" />
     <ConvertsEUR EuroToConvert="90" TwoEuroToConvert="100" />
   </section>
 </Layout>
