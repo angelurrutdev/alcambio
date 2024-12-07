@@ -33,7 +33,6 @@ const global = await get();
         name="BCV"
         title="BCV"
       />
-      <ButtonHidden id="btn-copy-convert" />
 
       <PillMount
         id="Paralelo"
@@ -44,15 +43,16 @@ const global = await get();
     </ul>
   </section>
   <article
-    class="text-center text-accent md:my-8 my-3 items-center flex flex-col"
+    class="text-center text-accent md:my-2 my-3 items-center flex flex-col"
   >
     <p class="text-5xl md:text-7xl font-bold" id="mount">
       Bs.S <strong>{global.monitors.bcv.price}</strong>
     </p>
-    <p class="text-neutral-500 px-9 py-1 mt-5 max-w-72 text-xs">
+    <p class="text-neutral-500 px-9 py-1 my-3 max-w-72 text-xs">
       Última actualización <br />
       <strong>{global.monitors.bcv.last_update}</strong>
     </p>
+    <ButtonHidden id="btn-copy-convert" />
   </article>
 
   <form

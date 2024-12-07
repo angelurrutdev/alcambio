@@ -6,12 +6,14 @@ import Spain from "@components/icons/Spain.astro";
 import Venezuela from "@icons/Venezuela.astro";
 import Layout from "@layouts/Layout.astro";
 import { get } from "src/lib/euro/get";
-import Converts from "@components/Converts.astro";
 import ConvertsEUR from "@components/ConvertsEUR.astro";
 const global = await get();
 ---
 
-<Layout>
+<Layout
+  title="VeCambio - Tu alternativa perfecta para cambiar tus euros a bolivares"
+  description="Cambia YA tus Euros a Bolivares de manera inmedianta y precisa eligiendo la tasa del BCV o Dolar Paralelo y muchas otras"
+>
   <Header
     value={global.monitors.bcv.price}
     value_datetime={global.datetime.date}
@@ -43,20 +45,19 @@ const global = await get();
           name="Paralelo"
           title="Paralelo"
         />
-
-        <ButtonHidden id="btn-copy-convert" />
       </ul>
     </section>
     <article
-      class="text-center text-accent md:my-8 my-3 items-center flex flex-col"
+      class="text-center text-accent md:my-2 my-3 items-center flex flex-col"
     >
       <p class="text-5xl md:text-7xl font-bold" id="mount">
         Bs.S <strong>{global.monitors.bcv.price}</strong>
       </p>
-      <p class="text-neutral-500 px-9 py-1 mt-5 max-w-72 text-xs">
+      <p class="text-neutral-500 px-9 py-1 my-3 max-w-72 text-xs">
         Última actualización <br />
         <strong>{global.monitors.bcv.last_update}</strong>
       </p>
+      <ButtonHidden id="btn-copy-convert" />
     </article>
 
     <form

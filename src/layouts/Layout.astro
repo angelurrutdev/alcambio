@@ -1,6 +1,14 @@
 ---
-import Footer from "../components/Footer.astro";
-import Header from "../components/Header.astro";
+import "@fontsource/geist-mono"; // Defaults to weight 400
+import "@fontsource/geist-mono/400.css"; // Specify weight
+
+import Footer from "@components/Footer.astro";
+
+interface Props {
+  description: string;
+  title: string;
+}
+const { description, title } = Astro.props;
 ---
 
 <!doctype html>
@@ -8,8 +16,24 @@ import Header from "../components/Header.astro";
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <title>Al Cambio</title>
+    <link rel="icon" type="image/svg+xml" href="/145.svg" />
+    <meta property="og:title" content={title} />
+    <meta name="description" content={description} />
+    <meta property="og:description" content={title} />
+    <meta property="og:image" content={title} />
+    <meta property="og:image:alt" content={title} />
+    <meta property="og:url" content="https://vecambio.vercel.app" />
+    <meta property="og:type" content="website" />
+    <link rel="alternate" href="https://vecambio.vercel.app" hreflang="es-MX" />
+    <link rel="canonical" href="https://vecambio.vercel.app" />
+    <meta name="themecolor" content="#0b0a10" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={title} />
+    <meta name="twitter:image" content={title} />
+
+    <title>{title}</title>
   </head>
   <body
     class="bg-moonlit dark:bg-dusky min-h-screen scroll-smooth font-sans antialiased selection:bg-neutral-200 dark:selection:bg-neutral-700"
@@ -27,6 +51,8 @@ import Header from "../components/Header.astro";
   }
 
   html {
+    font-family: "Geist Mono";
+
     scroll-behavior: smooth;
   }
 
