@@ -21,8 +21,7 @@ const global = await get();
     <h3 class="text-2xl font-bold">Calculadora</h3>
 
     <h1 class="md:text-base text-sm opacity-70">
-      Convierté dólares estadounidenses a bolívares a la tasa de paralelo y BCV
-      - USD a VES
+      Convierte USD a VES al BCV o Paralelo a la tasa del día.
     </h1>
   </div>
   <section class="flex justify-center mt-2">
@@ -45,7 +44,7 @@ const global = await get();
   <article
     class="text-center text-accent md:my-2 my-3 items-center flex flex-col"
   >
-    <p class="text-5xl md:text-7xl font-bold" id="mount">
+    <p class="text-5xl md:text-7xl font-semibold" id="mount">
       Bs.S <strong>{global.monitors.bcv.price}</strong>
     </p>
     <p class="text-neutral-500 px-9 py-1 my-3 max-w-72 text-xs">

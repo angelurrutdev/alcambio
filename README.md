@@ -2,15 +2,15 @@
 
 ## TODO- LIST
 
-[] Crear un logo y un banner para la web
-[] Añadir otras monedas en rapidapi especialmente (https://rapidapi.com/TockaAyman/api/currencyconverter9/playground/apiendpoint_25b8a416-334f-4d0c-b282-20c243520a11)
-[] Poner un Header para moviles
 [] Agregar Datos de otras plataformas (DolarToday, ETC...)
 [] Mudar a vecambio.vercel.app
+[X] Poner un Header para moviles
+[X] Crear un logo y un banner para la web
 [X] Diseñar y Crear una pagina de erorr 404
 [X] Cambiar el footer a uno menos egocentrico xd
 [X] Diseñar y Crear una pagina de FAQ
 [X] Habilitar boton de copy paste y colocarlo en un buen sitio
+[] Añadir otras monedas en rapidapi especialmente (https://rapidapi.com/TockaAyman/api/currencyconverter9/playground/apiendpoint_25b8a416-334f-4d0c-b282-20c243520a11)
 
 ```sh
 npm create astro@latest -- --template basics
