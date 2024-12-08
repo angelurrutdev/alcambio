@@ -8,6 +8,7 @@
       "@layouts/*": ["src/layouts/*"],
       "@lib-dollar/*": ["src/lib/dollar/*"],
       "@lib-euro/*": ["src/lib/euro/*"],
+      "@lib-othermonitors/*": ["src/lib/othermonitors/*"],
     }
   },
   "include": [

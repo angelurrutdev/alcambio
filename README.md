@@ -2,8 +2,8 @@
 
 ## TODO- LIST
 
-[] Agregar Datos de otras plataformas (DolarToday, ETC...)
-[] Mudar a vecambio.vercel.app
+[X] Agregar Datos de otras plataformas (DolarToday, ETC...)
+[X] Mudar a vecambio.vercel.app
 [X] Poner un Header para moviles
 [X] Crear un logo y un banner para la web
 [X] Diseñar y Crear una pagina de erorr 404

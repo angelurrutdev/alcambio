@@ -1,0 +1,58 @@
+---
+import Layout from "@layouts/Layout.astro";
+import Header from "@components/Header.astro";
+import OtherMonitors from "@components/OtherMonitors.astro";
+
+import { get } from "@lib-othermonitors/get";
+const global = await get();
+---
+
+<Layout
+  title="VeCambio - El Equivalente en Bolivares de otras plataformas"
+  description="El Equivalente en Bolivares de otras plataformas: DolarToday, CriptoDolar, UpHold, Binance, Paypal, Skrill"
+>
+  <Header
+    value={global.monitors.bcv.price}
+    value_datetime={global.datetime.date}
+    sign="$"
+  />
+
+  <section
+    class="h-screen mt-12 mx-auto w-[340px] md:w-1/2 rounded-3xl bg-white border-2 border-transparent dark:text-neutral-100 dark:bg-raisin-black overflow-hidden p-6 lg:p-8 text-gray-900"
+  >
+    <h2 class="text-base md:text-lg dark:text-white text-gray-900 font-bold">
+      Tasa de otras plataformas:
+    </h2>
+    <OtherMonitors
+      monitor={global.monitors.binance.title}
+      monitor_tasa={global.monitors.binance.price}
+      datetime={global.monitors.binance.last_update}
+      image={global.monitors.binance.image}
+      Twomonitor={global.monitors.cripto_dolar.title}
+      Twomonitor_tasa={global.monitors.cripto_dolar.price}
+      Twodatetime={global.monitors.cripto_dolar.last_update}
+      Twoimage={global.monitors.cripto_dolar.image}
+    />
+    <OtherMonitors
+      monitor={global.monitors.dolar_today.title}
+      monitor_tasa={global.monitors.dolar_today.price}
+      datetime={global.monitors.dolar_today.last_update}
+      image={global.monitors.dolar_today.image}
+      Twomonitor={global.monitors.paypal.title}
+      Twomonitor_tasa={global.monitors.paypal.price}
+      Twodatetime={global.monitors.paypal.last_update}
+      Twoimage={global.monitors.paypal.image}
+    />
+
+    <OtherMonitors
+      monitor={global.monitors.skrill.title}
+      monitor_tasa={global.monitors.skrill.price}
+      datetime={global.monitors.skrill.last_update}
+      image={global.monitors.skrill.image}
+      Twomonitor={global.monitors.uphold.title}
+      Twomonitor_tasa={global.monitors.uphold.price}
+      Twodatetime={global.monitors.uphold.last_update}
+      Twoimage={global.monitors.uphold.image}
+    />
+  </section>
+</Layout>

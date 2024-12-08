@@ -1,6 +1,6 @@
 ---
 import ThemeToggle from "./ThemeToggle.astro";
-import CalculatorIcon from "./icons/CalculatorIcon.astro";
+import OtherIcon from "./icons/OtherIcon.astro";
 import DollarIcon from "./icons/DollarIcon.astro";
 import EuroIcon from "./icons/EuroIcon.astro";
 import Logo from "./icons/Logo.astro";
@@ -12,8 +12,6 @@ interface Props {
   value_datetime: string;
   sign: string;
 }
-
-// border-b py-1 md:py-2 ring-white/40 dark:ring-white dark:border-b-white/40 border-b-white/20 px-2 dark:text-white text-dusky bg-white/60 dark:bg-raisin-black justify-between items-center
 ---
 
 <header
@@ -56,8 +54,8 @@ interface Props {
           class="inline-flex items-center space-x-3 justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 disabled:pointer-events-none disabled:opacity-50 dark:focus-visible:ring-neutral-700 focus-visible:ring-neutral-500 border border-neutral-200 bg-white shadow-sm hover:bg-neutral-100 hover:text-neutral-900 dark:border-neutral-800 dark:bg-cuber-black dark:hover:bg-raisin-black dark:hover:text-neutral-50 dark:hover:border-neutral-700/50 h-9 px-4 py-2"
           href=""
         >
-          <CalculatorIcon class="block" />
-          <p class="md:block hidden">Calculadora</p>
+          <OtherIcon class="block" />
+          <p class="md:block hidden">Otras Plataformas</p>
         </a>
       </li>
     </ul>
@@ -78,62 +76,3 @@ interface Props {
     <ThemeToggle />
   </div>
 </header>
-
-<!-- <header>
-  <nav class="flex flex-row">
-    <a href="/" class="flex">
-      <Logo />
-      <span
-        class="self-center whitespace-nowrap text-lg font-medium tracking-tight dark:text-white"
-      >
-        VeCambio
-      </span>
-    </a>
-    <ul class="gap-x-2 md:flex flex-row justify-start mx-5">
-      <li>
-        <a
-          class="inline-flex items-center space-x-3 justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 disabled:pointer-events-none disabled:opacity-50 dark:focus-visible:ring-neutral-700 focus-visible:ring-neutral-500 border border-neutral-200 bg-white shadow-sm hover:bg-neutral-100 hover:text-neutral-900 dark:border-neutral-800 dark:bg-cuber-black dark:hover:bg-raisin-black dark:hover:text-neutral-50 dark:hover:border-neutral-700/50 h-9 px-4 py-2"
-          href="/"
-        >
-          <DollarIcon class="block" />
-          <p class="md:block hidden">Convertir Dolares</p>
-        </a>
-      </li>
-
-      <li>
-        <a
-          class="inline-flex items-center space-x-3 justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 disabled:pointer-events-none disabled:opacity-50 dark:focus-visible:ring-neutral-700 focus-visible:ring-neutral-500 border border-neutral-200 bg-white shadow-sm hover:bg-neutral-100 hover:text-neutral-900 dark:border-neutral-800 dark:bg-cuber-black dark:hover:bg-raisin-black dark:hover:text-neutral-50 dark:hover:border-neutral-700/50 h-9 px-4 py-2"
-          href="/euros"
-        >
-          <EuroIcon class="block" />
-          <p class="md:block hidden">Convertir Euros</p>
-        </a>
-      </li>
-
-      <li>
-        <a
-          class="inline-flex items-center space-x-3 justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 disabled:pointer-events-none disabled:opacity-50 dark:focus-visible:ring-neutral-700 focus-visible:ring-neutral-500 border border-neutral-200 bg-white shadow-sm hover:bg-neutral-100 hover:text-neutral-900 dark:border-neutral-800 dark:bg-cuber-black dark:hover:bg-raisin-black dark:hover:text-neutral-50 dark:hover:border-neutral-700/50 h-9 px-4 py-2"
-          href=""
-        >
-          <CalculatorIcon class="block" />
-          <p class="md:block hidden">Calculadora</p>
-        </a>
-      </li>
-    </ul>
-  </nav>
-
-  <div class="flex items-center space-x-4 py-2 px-4">
-    <h2
-      class="text-accent flex text-sm rounded-full border-2 px-3 py-1 text-center min-w-32 lg:min-w-80 items-center"
-    >
-      {sign}
-      <strong> 1.00 </strong>
-      <span class="mx-1"> = </span>
-      <span id="price-usd">
-        Bs.S <strong class="">{value}</strong>
-      </span>
-      <span class="hidden md:flex ms-2"> {value_datetime}</span>
-    </h2>
-    <ThemeToggle />
-  </div>
-</header> -->
