@@ -5,6 +5,9 @@ import OtherMonitors from "@components/OtherMonitors.astro";
 
 import { get } from "@lib-othermonitors/get";
 const global = await get();
+
+import { othercurrrency_get } from "@lib-othercurrency/othercurrency_get";
+const othercurrency_global = await othercurrrency_get();
 ---
 
 <Layout
@@ -18,7 +21,7 @@ const global = await get();
   />
 
   <section
-    class="h-screen mt-12 mx-auto w-[340px] md:w-1/2 rounded-3xl bg-white border-2 border-transparent dark:text-neutral-100 dark:bg-raisin-black overflow-hidden p-6 lg:p-8 text-gray-900"
+    class="h-screen overflow-y-auto mt-12 mx-auto w-[340px] md:w-1/2 rounded-3xl bg-white border-2 border-transparent dark:text-neutral-100 dark:bg-raisin-black p-6 lg:p-8 text-gray-900"
   >
     <h2 class="text-base md:text-lg dark:text-white text-gray-900 font-bold">
       Tasa de otras plataformas:
@@ -53,6 +56,65 @@ const global = await get();
       Twomonitor_tasa={global.monitors.uphold.price}
       Twodatetime={global.monitors.uphold.last_update}
       Twoimage={global.monitors.uphold.image}
+    />
+
+    <h2 class="text-base md:text-lg dark:text-white text-gray-900 font-bold">
+      Tasa de otros Paises:
+    </h2>
+
+    <OtherMonitors
+      monitor={othercurrency_global.monitors.usd.title}
+      monitor_tasa={othercurrency_global.monitors.usd.price}
+      datetime={othercurrency_global.monitors.usd.last_update}
+      image="/eeuu.webp"
+      Twomonitor={othercurrency_global.monitors.gbp.title}
+      Twomonitor_tasa={othercurrency_global.monitors.gbp.price}
+      Twodatetime={othercurrency_global.monitors.gbp.last_update}
+      Twoimage="ing.webp"
+    />
+
+    <OtherMonitors
+      monitor={othercurrency_global.monitors.ars.title}
+      monitor_tasa={othercurrency_global.monitors.ars.price}
+      datetime={othercurrency_global.monitors.ars.last_update}
+      image="/arg.webp"
+      Twomonitor={othercurrency_global.monitors.bob.title}
+      Twomonitor_tasa={othercurrency_global.monitors.bob.price}
+      Twodatetime={othercurrency_global.monitors.bob.last_update}
+      Twoimage="bol.webp"
+    />
+
+    <OtherMonitors
+      monitor={othercurrency_global.monitors.brl.title}
+      monitor_tasa={othercurrency_global.monitors.brl.price}
+      datetime={othercurrency_global.monitors.brl.last_update}
+      image="brl.webp"
+      Twomonitor={othercurrency_global.monitors.clp.title}
+      Twomonitor_tasa={othercurrency_global.monitors.clp.price}
+      Twodatetime={othercurrency_global.monitors.clp.last_update}
+      Twoimage="chl.webp"
+    />
+
+    <OtherMonitors
+      monitor={othercurrency_global.monitors.cop.title}
+      monitor_tasa={othercurrency_global.monitors.cop.price}
+      datetime={othercurrency_global.monitors.cop.last_update}
+      image="col.webp"
+      Twomonitor={othercurrency_global.monitors.dop.title}
+      Twomonitor_tasa={othercurrency_global.monitors.dop.price}
+      Twodatetime={othercurrency_global.monitors.dop.last_update}
+      Twoimage="rd.webp"
+    />
+
+    <OtherMonitors
+      monitor={othercurrency_global.monitors.pen.title}
+      monitor_tasa={othercurrency_global.monitors.pen.price}
+      datetime={othercurrency_global.monitors.pen.last_update}
+      image="peru.webp"
+      Twomonitor={othercurrency_global.monitors.uyu.title}
+      Twomonitor_tasa={othercurrency_global.monitors.uyu.price}
+      Twodatetime={othercurrency_global.monitors.uyu.last_update}
+      Twoimage="uyu.webp"
     />
   </section>
 </Layout>

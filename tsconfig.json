@@ -9,6 +9,7 @@
       "@lib-dollar/*": ["src/lib/dollar/*"],
       "@lib-euro/*": ["src/lib/euro/*"],
       "@lib-othermonitors/*": ["src/lib/othermonitors/*"],
+      "@lib-othercurrency/*": ["src/lib/othercurrency/*"],
     }
   },
   "include": [
