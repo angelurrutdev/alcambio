@@ -61,18 +61,20 @@ interface Props {
     </ul>
   </nav>
 
-  <div class="hidden md:flex items-center space-x-4 p-2">
-    <h2
-      class="text-accent flex text-sm rounded-full border-2 px-3 py-1 text-center min-w-32 lg:min-w-80 items-center"
-    >
-      {sign}
-      <strong> 1.00 </strong>
-      <span class="mx-1"> = </span>
-      <span id="price-usd">
-        Bs.S <strong class="">{value}</strong>
-      </span>
-      <span class="hidden md:flex ms-2"> {value_datetime}</span>
-    </h2>
+  <div class="items-center space-x-4 p-2 flex">
+    <div class="hidden sm:flex md:flex">
+      <h2
+        class="text-accent flex text-sm rounded-full border-2 px-3 py-1 text-center min-w-32 lg:min-w-80 items-center"
+      >
+        {sign}
+        <strong> 1.00 </strong>
+        <span class="mx-1"> = </span>
+        <span id="price-usd">
+          Bs.S <strong class="">{value}</strong>
+        </span>
+        <span class="hidden md:flex ms-2"> {value_datetime}</span>
+      </h2>
+    </div>
+    <ThemeToggle />
   </div>
-  <ThemeToggle />
 </header>
