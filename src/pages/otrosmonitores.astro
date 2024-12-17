@@ -3,11 +3,9 @@ import Layout from "@layouts/Layout.astro";
 import Header from "@components/Header.astro";
 import OtherMonitors from "@components/OtherMonitors.astro";
 
-import { get } from "@lib-othermonitors/get";
-const global = await get();
-
-import { othercurrrency_get } from "@lib-othercurrency/othercurrency_get";
-const othercurrency_global = await othercurrrency_get();
+import { getMonitor } from "@lib/currencymonitor";
+const getMonitorItalcambio = await getMonitor("italcambio");
+const getMonitorCriptodolar = await getMonitor("criptodolar");
 ---
 
 <Layout
@@ -15,8 +13,8 @@ const othercurrency_global = await othercurrrency_get();
   description="El Equivalente en Bolivares de otras plataformas: DolarToday, CriptoDolar, UpHold, Binance, Paypal, Skrill"
 >
   <Header
-    value={global.monitors.bcv.price}
-    value_datetime={global.datetime.date}
+    value={getMonitorCriptodolar.monitors.bcv.price}
+    value_datetime={getMonitorCriptodolar.datetime.date}
     sign="$"
   />
 
@@ -28,35 +26,35 @@ const othercurrency_global = await othercurrrency_get();
       Tasa de otras plataformas:
     </h2>
     <OtherMonitors
-      monitor={global.monitors.binance.title}
-      monitor_tasa={global.monitors.binance.price}
-      datetime={global.monitors.binance.last_update}
-      image={global.monitors.binance.image}
-      Twomonitor={global.monitors.cripto_dolar.title}
-      Twomonitor_tasa={global.monitors.cripto_dolar.price}
-      Twodatetime={global.monitors.cripto_dolar.last_update}
-      Twoimage={global.monitors.cripto_dolar.image}
+      monitor={getMonitorCriptodolar.monitors.binance.title}
+      monitor_tasa={getMonitorCriptodolar.monitors.binance.price}
+      datetime={getMonitorCriptodolar.monitors.binance.last_update}
+      image={getMonitorCriptodolar.monitors.binance.image}
+      Twomonitor={getMonitorCriptodolar.monitors.cripto_dolar.title}
+      Twomonitor_tasa={getMonitorCriptodolar.monitors.cripto_dolar.price}
+      Twodatetime={getMonitorCriptodolar.monitors.cripto_dolar.last_update}
+      Twoimage={getMonitorCriptodolar.monitors.cripto_dolar.image}
     />
     <OtherMonitors
-      monitor={global.monitors.dolar_today.title}
-      monitor_tasa={global.monitors.dolar_today.price}
-      datetime={global.monitors.dolar_today.last_update}
-      image={global.monitors.dolar_today.image}
-      Twomonitor={global.monitors.paypal.title}
-      Twomonitor_tasa={global.monitors.paypal.price}
-      Twodatetime={global.monitors.paypal.last_update}
-      Twoimage={global.monitors.paypal.image}
+      monitor={getMonitorCriptodolar.monitors.dolar_today.title}
+      monitor_tasa={getMonitorCriptodolar.monitors.dolar_today.price}
+      datetime={getMonitorCriptodolar.monitors.dolar_today.last_update}
+      image={getMonitorCriptodolar.monitors.dolar_today.image}
+      Twomonitor={getMonitorCriptodolar.monitors.paypal.title}
+      Twomonitor_tasa={getMonitorCriptodolar.monitors.paypal.price}
+      Twodatetime={getMonitorCriptodolar.monitors.paypal.last_update}
+      Twoimage={getMonitorCriptodolar.monitors.paypal.image}
     />
 
     <OtherMonitors
-      monitor={global.monitors.skrill.title}
-      monitor_tasa={global.monitors.skrill.price}
-      datetime={global.monitors.skrill.last_update}
-      image={global.monitors.skrill.image}
-      Twomonitor={global.monitors.uphold.title}
-      Twomonitor_tasa={global.monitors.uphold.price}
-      Twodatetime={global.monitors.uphold.last_update}
-      Twoimage={global.monitors.uphold.image}
+      monitor={getMonitorCriptodolar.monitors.skrill.title}
+      monitor_tasa={getMonitorCriptodolar.monitors.skrill.price}
+      datetime={getMonitorCriptodolar.monitors.skrill.last_update}
+      image={getMonitorCriptodolar.monitors.skrill.image}
+      Twomonitor={getMonitorCriptodolar.monitors.uphold.title}
+      Twomonitor_tasa={getMonitorCriptodolar.monitors.uphold.price}
+      Twodatetime={getMonitorCriptodolar.monitors.uphold.last_update}
+      Twoimage={getMonitorCriptodolar.monitors.uphold.image}
     />
 
     <h2 class="text-base md:text-lg dark:text-white text-gray-900 font-bold">
@@ -64,57 +62,57 @@ const othercurrency_global = await othercurrrency_get();
     </h2>
 
     <OtherMonitors
-      monitor={othercurrency_global.monitors.usd.title}
-      monitor_tasa={othercurrency_global.monitors.usd.price}
-      datetime={othercurrency_global.monitors.usd.last_update}
+      monitor={getMonitorItalcambio.monitors.usd.title}
+      monitor_tasa={getMonitorItalcambio.monitors.usd.price}
+      datetime={getMonitorItalcambio.monitors.usd.last_update}
       image="/eeuu.webp"
-      Twomonitor={othercurrency_global.monitors.gbp.title}
-      Twomonitor_tasa={othercurrency_global.monitors.gbp.price}
-      Twodatetime={othercurrency_global.monitors.gbp.last_update}
+      Twomonitor={getMonitorItalcambio.monitors.gbp.title}
+      Twomonitor_tasa={getMonitorItalcambio.monitors.gbp.price}
+      Twodatetime={getMonitorItalcambio.monitors.gbp.last_update}
       Twoimage="ing.webp"
     />
 
     <OtherMonitors
-      monitor={othercurrency_global.monitors.ars.title}
-      monitor_tasa={othercurrency_global.monitors.ars.price}
-      datetime={othercurrency_global.monitors.ars.last_update}
+      monitor={getMonitorItalcambio.monitors.ars.title}
+      monitor_tasa={getMonitorItalcambio.monitors.ars.price}
+      datetime={getMonitorItalcambio.monitors.ars.last_update}
       image="/arg.webp"
-      Twomonitor={othercurrency_global.monitors.bob.title}
-      Twomonitor_tasa={othercurrency_global.monitors.bob.price}
-      Twodatetime={othercurrency_global.monitors.bob.last_update}
+      Twomonitor={getMonitorItalcambio.monitors.bob.title}
+      Twomonitor_tasa={getMonitorItalcambio.monitors.bob.price}
+      Twodatetime={getMonitorItalcambio.monitors.bob.last_update}
       Twoimage="bol.webp"
     />
 
     <OtherMonitors
-      monitor={othercurrency_global.monitors.brl.title}
-      monitor_tasa={othercurrency_global.monitors.brl.price}
-      datetime={othercurrency_global.monitors.brl.last_update}
+      monitor={getMonitorItalcambio.monitors.brl.title}
+      monitor_tasa={getMonitorItalcambio.monitors.brl.price}
+      datetime={getMonitorItalcambio.monitors.brl.last_update}
       image="brl.webp"
-      Twomonitor={othercurrency_global.monitors.clp.title}
-      Twomonitor_tasa={othercurrency_global.monitors.clp.price}
-      Twodatetime={othercurrency_global.monitors.clp.last_update}
+      Twomonitor={getMonitorItalcambio.monitors.clp.title}
+      Twomonitor_tasa={getMonitorItalcambio.monitors.clp.price}
+      Twodatetime={getMonitorItalcambio.monitors.clp.last_update}
       Twoimage="chl.webp"
     />
 
     <OtherMonitors
-      monitor={othercurrency_global.monitors.cop.title}
-      monitor_tasa={othercurrency_global.monitors.cop.price}
-      datetime={othercurrency_global.monitors.cop.last_update}
+      monitor={getMonitorItalcambio.monitors.cop.title}
+      monitor_tasa={getMonitorItalcambio.monitors.cop.price}
+      datetime={getMonitorItalcambio.monitors.cop.last_update}
       image="col.webp"
-      Twomonitor={othercurrency_global.monitors.dop.title}
-      Twomonitor_tasa={othercurrency_global.monitors.dop.price}
-      Twodatetime={othercurrency_global.monitors.dop.last_update}
+      Twomonitor={getMonitorItalcambio.monitors.dop.title}
+      Twomonitor_tasa={getMonitorItalcambio.monitors.dop.price}
+      Twodatetime={getMonitorItalcambio.monitors.dop.last_update}
       Twoimage="rd.webp"
     />
 
     <OtherMonitors
-      monitor={othercurrency_global.monitors.pen.title}
-      monitor_tasa={othercurrency_global.monitors.pen.price}
-      datetime={othercurrency_global.monitors.pen.last_update}
+      monitor={getMonitorItalcambio.monitors.pen.title}
+      monitor_tasa={getMonitorItalcambio.monitors.pen.price}
+      datetime={getMonitorItalcambio.monitors.pen.last_update}
       image="peru.webp"
-      Twomonitor={othercurrency_global.monitors.uyu.title}
-      Twomonitor_tasa={othercurrency_global.monitors.uyu.price}
-      Twodatetime={othercurrency_global.monitors.uyu.last_update}
+      Twomonitor={getMonitorItalcambio.monitors.uyu.title}
+      Twomonitor_tasa={getMonitorItalcambio.monitors.uyu.price}
+      Twodatetime={getMonitorItalcambio.monitors.uyu.last_update}
       Twoimage="uyu.webp"
     />
   </section>

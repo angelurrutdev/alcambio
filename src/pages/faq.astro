@@ -1,8 +1,9 @@
 ---
 import Layout from "@layouts/Layout.astro";
 import Header from "@components/Header.astro";
-import { get } from "src/lib/dollar/get";
-const global = await get();
+
+import { getCurrency } from "@lib/currencymonitor";
+const getCurrencyDollar = await getCurrency("dollar");
 ---
 
 <Layout
@@ -10,8 +11,8 @@ const global = await get();
   description="Cambia YA tus Dolares a Bolivares de manera inmedianta y precisa eligiendo la tasa del BCV o Dolar Paralelo y muchas otras"
 >
   <Header
-    value={global.monitors.bcv.price}
-    value_datetime={global.datetime.date}
+    value={getCurrencyDollar.monitors.bcv.price}
+    value_datetime={getCurrencyDollar.datetime.date}
     sign="$"
   />
   <main

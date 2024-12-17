@@ -2,8 +2,9 @@
 import Arrows from "./icons/Arrows.astro";
 import UnitedStates from "./icons/UnitedStates.astro";
 import Venezuela from "./icons/Venezuela.astro";
-import { get } from "@lib-dollar/get";
-const global = await get();
+import { getCurrency } from "@lib/currencymonitor";
+
+const setCurrencyDollar = await getCurrency("dollar");
 
 const { DollarToConvert, TwoDollarToConvert } = Astro.props;
 
@@ -14,8 +15,10 @@ interface Props {
 
 const initialDollarAmount = parseFloat(DollarToConvert);
 const TwoinitialDollarAmount = parseFloat(TwoDollarToConvert);
-const TwoBolivaresConvert = TwoinitialDollarAmount * global.monitors.bcv.price;
-const BolivaresConvert = initialDollarAmount * global.monitors.bcv.price;
+const TwoBolivaresConvert =
+  TwoinitialDollarAmount * setCurrencyDollar.monitors.bcv.price;
+const BolivaresConvert =
+  initialDollarAmount * setCurrencyDollar.monitors.bcv.price;
 ---
 
 <article

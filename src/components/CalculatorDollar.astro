@@ -5,16 +5,21 @@ import Header from "@components/Header.astro";
 import UnitedStates from "@icons/UnitedStates.astro";
 import Venezuela from "@icons/Venezuela.astro";
 import Converts from "@components/Converts.astro";
-import { get } from "@lib-dollar/get";
-const global = await get();
+import HeaderToggle from "./HeaderToggle.astro";
+import { getCurrency } from "../lib/currencymonitor";
+
+const setCurrencyDollar = await getCurrency("dollar");
 ---
 
-<Header
-  value={global.monitors.bcv.price}
-  value_datetime={global.datetime.date}
-  sign="$"
-/>
-<section transition:name="bg_section"
+<Header>
+  <HeaderToggle
+    value={setCurrencyDollar.monitors.bcv.price}
+    value_datetime={setCurrencyDollar.datetime.date}
+    sign="$"
+  />
+</Header>
+<section
+  transition:name="bg_section"
   class="mt-12 mx-auto w-[340px] md:w-1/2 rounded-3xl bg-white border-2 border-transparent dark:text-neutral-100 dark:bg-raisin-black overflow-hidden p-6 lg:p-8 text-gray-900"
 >
   <div class="flex flex-col gap-1 z-[1]">
@@ -28,14 +33,14 @@ const global = await get();
     <ul class="grid grid-cols-2 rounded-lg gap-x-2">
       <PillMount
         id="BCV"
-        value={global.monitors.bcv.price}
+        value={setCurrencyDollar.monitors.bcv.price}
         name="BCV"
         title="BCV"
       />
 
       <PillMount
         id="Paralelo"
-        value={global.monitors.enparalelovzla.price}
+        value={setCurrencyDollar.monitors.enparalelovzla.price}
         name="Paralelo"
         title="Paralelo"
       />
@@ -45,11 +50,13 @@ const global = await get();
     class="text-center text-accent md:my-2 my-3 items-center flex flex-col"
   >
     <p class="text-5xl md:text-7xl font-semibold" id="mount">
-      Bs.S <strong>{global.monitors.bcv.price}</strong>
+      Bs.S <strong>{setCurrencyDollar.monitors.bcv.price}</strong>
     </p>
     <p class="text-neutral-500 px-9 py-1 my-3 max-w-72 text-xs">
       Última actualización <br />
-      <strong class="font-mono">{global.monitors.bcv.last_update}</strong>
+      <strong class="font-mono"
+        >{setCurrencyDollar.monitors.bcv.last_update}</strong
+      >
     </p>
     <CopyButton id="btn-copy-convert" />
   </article>
@@ -103,7 +110,7 @@ const global = await get();
           id="bolivares"
           name="value"
           type="text"
-          placeholder={global.monitors.bcv.price}
+          placeholder={setCurrencyDollar.monitors.bcv.price}
           autocomplete="off"
           autofocus=""
           spellcheck="false"
@@ -129,11 +136,16 @@ const global = await get();
 </section>
 
 <script>
-  import { get } from "@lib-dollar/get";
+  import { getCurrency } from "../lib/currencymonitor";
+
+  async function get() {
+    const setCurrencyDollar = await getCurrency("dollar");
+    return setCurrencyDollar;
+  }
 
   (async function () {
-    const global = await get();
-    const tasa_bcv = `${global.monitors.bcv.price}`;
+    const setCurrencyDollar = await get();
+    const tasa_bcv = `${setCurrencyDollar.monitors.bcv.price}`;
 
     const $ = (el: string) => document.querySelector(el);
 
