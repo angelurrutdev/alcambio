@@ -6,10 +6,7 @@
       "@components/*": ["src/components/*"],
       "@icons/*": ["src/components/icons/*"],
       "@layouts/*": ["src/layouts/*"],
-      "@lib-dollar/*": ["src/lib/dollar/*"],
-      "@lib-euro/*": ["src/lib/euro/*"],
-      "@lib-othermonitors/*": ["src/lib/othermonitors/*"],
-      "@lib-othercurrency/*": ["src/lib/othercurrency/*"],
+      "@lib/*": ["src/lib/*"],
     }
   },
   "include": [
